@@ -22,12 +22,14 @@ code {
   position: absolute;
   left: 45%;
   /* top: 0%; */
-  width: 25px;
-  height: 25px;
-  line-height: 25px;
-  text-align: center;
-  font-size: 11px;
-  color: white;
-  background: grey;
-  border-radius: 100px;
+  /* width: 25px;
+  height: 25px; */
+  /* line-height: 25px; */
+  /* text-align: center; */
+  font-size: 13px;
+  /* color: white; */
+  /* background: grey; */
+  /* border-radius: 100px; */
+  cursor: pointer;
+  opacity: 0.5;
 }
