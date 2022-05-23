@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import ReactTooltip from "react-tooltip";
 
 const Tag = ({ pixels, onClickTag = () => {}, id }) => {
-  console.log(pixels)
   useEffect(() => {
     ReactTooltip.rebuild();
   });

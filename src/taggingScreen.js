@@ -25,33 +25,50 @@ const TaggingScreen = () => {
     setModalData({ name: "", descp: "" });
   };
 
+  // const myTag = (e) => {
+  //   openModal();
+  //   // Adjust tags just subtracting the number i.e for is - 400.
+  //   var pos_x = e.offsetX
+  //     ? e.offsetX
+  //     : e.pageX - imgRef.current.offsetLeft - 400;
+  //   var pos_x_test = e.offsetX
+  //     ? e.offsetX
+  //     : e.pageX - parentRef.current.offsetLeft;
+  //   // Adjust tags just subtracting the number i.e for is - 170.
+  //   var pos_y = e.offsetY
+  //     ? e.offsetY
+  //     : e.pageY - imgRef.current.offsetTop - 170;
+  //   let pos_x_percent =
+  //     (pos_x / parseInt(parentRef.current.style.width, 10)) * 100;
+  //   let pos_y_percent =
+  //     (pos_y / parseInt(parentRef.current.style.height, 10)) * 100;
+  //   // setTags([
+  //   //   ...tags,
+  //   //   { x: `${Math.floor(pos_x_percent)}%`, y: `${pos_y_percent}%` },
+  //   // ]);
+  //   setClickedCords({
+  //     x: `${Math.floor(pos_x_percent)}%`,
+  //     y: `${pos_y_percent}%`,
+  //   });
+  // };
+
   const myTag = (e) => {
     openModal();
-    // Adjust tags just subtracting the number i.e for is - 400.
-    var pos_x = e.offsetX
-      ? e.offsetX
-      : e.pageX - imgRef.current.offsetLeft - 400;
-    // Adjust tags just subtracting the number i.e for is - 170.
-    var pos_y = e.offsetY
-      ? e.offsetY
-      : e.pageY - imgRef.current.offsetTop - 170;
-    let pos_x_percent =
-      (pos_x / parseInt(parentRef.current.style.width, 10)) * 100;
-    let pos_y_percent =
-      (pos_y / parseInt(parentRef.current.style.height, 10)) * 100;
-    // setTags([
-    //   ...tags,
-    //   { x: `${Math.floor(pos_x_percent)}%`, y: `${pos_y_percent}%` },
-    // ]);
+    
+    var pos_x = Math.abs(e.nativeEvent.offsetX);
+    var pos_y = Math.abs(e.nativeEvent.offsetY);
+
+    let pos_x_percent = (pos_x / parentRef.current.clientHeight) * 100;
+    let pos_y_percent = (pos_y / parentRef.current.clientWidth) * 100;
     setClickedCords({
-      x: `${Math.floor(pos_x_percent)}%`,
+      x: `${pos_x_percent}%`,
       y: `${pos_y_percent}%`,
     });
   };
 
   const createTag = () => {
     setTags([...tags, { ...clickedCords, ...modalData }]);
-    closeModal()
+    closeModal();
   };
 
   const onCancel = () => {
@@ -66,16 +83,16 @@ const TaggingScreen = () => {
         <p>Click edit to create/remove tags</p>
         <div className="row">
           {isEdit ? (
-            <div className="col-md-12">
+            <div className="col-md-12 col-sm-12">
               <button
                 onClick={() => onCancel()}
-                className="btn btn-lg btn-outline-danger mb-3"
+                className="btn btn-sm btn-outline-danger mb-3"
               >
                 Cancel
               </button>
               <button
                 onClick={() => setIsEdit(false)}
-                className="btn btn-lg btn-outline-success mb-3 ml-3"
+                className="btn btn-sm btn-outline-success mb-3 ml-3"
               >
                 Save
               </button>
@@ -84,7 +101,7 @@ const TaggingScreen = () => {
             <div className="col-md-12">
               <button
                 onClick={() => setIsEdit(true)}
-                className="btn btn-lg btn-outline-success mb-3"
+                className="btn btn-sm btn-sm btn-outline-success mb-3"
               >
                 Edit
               </button>
@@ -92,10 +109,9 @@ const TaggingScreen = () => {
           )}
         </div>
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-md-12 col-sm-12">
             <div
-              className="tag-area-main"
-              style={style.tagAreaMain}
+              className="tag-area-main bg-primary"
               ref={parentRef}
               id="tagImg"
             >
@@ -144,19 +160,24 @@ const TaggingScreen = () => {
         <button className="btn btn-md btn-outline-danger" onClick={closeModal}>
           Cancel
         </button>
-        <button className="btn btn-md btn-outline-success ml-3" onClick={createTag}>Create</button>
+        <button
+          className="btn btn-md btn-outline-success ml-3"
+          onClick={createTag}
+        >
+          Create
+        </button>
       </Modal>
     </>
   );
 };
 
-const style = {
-  tagAreaMain: {
-    width: "1000px",
-    height: "1000px",
-    position: "relative",
-  },
-};
+// const style = {
+//   tagAreaMain: {
+//     width: "1000px",
+//     height: "1000px",
+//     position: "relative",
+//   },
+// };
 // Modal style
 const customStyles = {
   content: {
